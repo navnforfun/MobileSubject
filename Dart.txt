@@ -1,0 +1,109 @@
+
+Bài toán tính tổng flutter
+
+Một số bài cơ bản với dart ---- XONG
+////////////
+class Nguoi{
+  String Ten;
+  int Tuoi;
+  Nguoi(this.Ten,this.Tuoi);
+}
+void main(){
+  Nguoi n1= Nguoi('Nguyen Van B',19);
+  print('Tên : ${n1.Ten}, Tuổi: ${n1.Tuoi}');
+}
+//////////////
+void main(){
+  List<String> mau=['do','luc','lam','tim'];
+  print('Màu sắc: $mau');
+  Map<String, int> diem= {'Toán':7, 'Văn': 6, 'Anh':9};
+  print('Điểm Toán: ${diem['Toán']}');
+}
+///////////////
+void main(){
+  List<int> So = [1,2,3,4,5,6];
+  print('Phan tu dau tien la: ${So[0]}');
+  print('Chieu dai cua mang: ${So.length}');
+}
+//////////////
+void main(){
+  int x = 5;
+  int y = 10;
+  int kq = x>y ? x:y;
+  print('So lon hon trong 2 so tren $kq');
+}
+////////////
+void main(){
+  String thu = 'Thu Hai';
+  switch(thu){
+    case 'Chu Nhat':
+      print('Nay la chu nhat');
+      break;
+    case 'Thu Hai':
+      print('Nay la thu hai');
+      break;
+    default:
+      print('Toi khong biet thu may');
+      
+  }
+}
+//////////////////
+void main(){
+  int a = 6;
+  int b = 9;
+  if(a>b){
+    print('So $a > So $b');
+  }else{
+    print('So $b > So $a');
+  }
+}
+//////////////////
+void main(){
+  int sothuc1 = 11;
+  double songuyen1 = sothuc1.toDouble();
+  print('So thuc sang so nguyen: $songuyen1');
+  double songuyen2 = 33.3;
+  int sothuc2 = songuyen2.toInt();
+  print('So nguyn sang so thuc: $sothuc2');
+}
+///////////////////
+void main(){
+  Map<String, dynamic> nguoi = {
+    'name':'Nguyen Van O',
+    'age': 21,
+    'isnghien':true,
+  };
+  print('Thong tin*****');
+  print('Ten: ${nguoi['name']}');
+  print("Tuoi: ${nguoi['age']}");
+  print('Co nghien khong: ${nguoi['isnghien']}');
+}
+///////////////////
+void main(){
+  dynamic bien = 22;
+  print('Bien ban dau: $bien');
+  bien = 'Toi khong nghien';
+  print('Bien da thay doi: $bien');
+}
+///////////////////
+void main(){
+  bool conghien = true;
+  bool khnghien = false;
+  print('Toi co nghien: $conghien');
+  
+  print('Toi kh nghien: $khnghien');
+}
+///////////////////
+void main(){
+  String s1 = "Tôi Nghiện";
+  String s2 = "Tôi nghẹo";
+  print('Chuỗi 1: $s1');
+  print('Chuỗi 2: $s2');
+}
+/////////////////
+void main(){
+  int b1 = 333;
+  double b2 =3.54;
+  print('Biến 1: $b1');
+  print('Biến 2: $b2');
+}
