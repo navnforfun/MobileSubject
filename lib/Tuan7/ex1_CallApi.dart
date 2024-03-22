@@ -60,7 +60,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
     List<Product> productList = [];
     //print(data);
     data.forEach((key, value) {
-
       for (int i = 0; i < value.length; i++) {
         Product p = Product(
             id: value[i]["id"],
@@ -86,23 +85,56 @@ class _ProductListScreenState extends State<ProductListScreen> {
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(products[index].tenbaihat),
-                  subtitle: Column(
-                    children: [
-                      Text(products[index].tacgia),
-                      Text(products[index].theloai),
-                    ],
-                  ),
-                  leading: Image.network(
-                    "https://t3.ftcdn.net/jpg/04/54/66/12/360_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg",
-                    width: 50,
-                    height: 50,
-                  ),
-                );
-              })
+                    title: Text(products[index].tenbaihat),
+                    subtitle: Column(
+                      children: [
+                        Text(products[index].tacgia),
+                        Text(products[index].theloai),
+                      ],
+                    ),
+                    leading: Image.network(
+                      "https://t3.ftcdn.net/jpg/04/54/66/12/360_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg",
+                      width: 50,
+                      height: 50,
+                    ),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProductDetail(
+                                  product: products[index],
+                                ))));
+              },
+            )
           : Center(
               child: CircularProgressIndicator(),
             ),
+    );
+  }
+}
+
+class ProductDetail extends StatelessWidget {
+  Product product;
+
+  ProductDetail({required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Detail"),
+      ),
+      body: Column(
+        children: [
+          Padding(padding: EdgeInsets.all(20)),
+          // Image(image: )
+          Text(product.tenbaihat),
+
+          Text(product.tacgia),
+          Text(product.duongdan),
+          Text(product.loibaihat),
+          Text("Luot nghe: " + product.luotnghe)
+        ],
+      ),
     );
   }
 }
@@ -113,10 +145,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ProductListScreen(),
+      home: HomeScreen(),
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
           useMaterial3: true),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home screen"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProductListScreen()));
+          },
+          child: Text("Go to list screen"),
+        ),
+      ),
     );
   }
 }
