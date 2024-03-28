@@ -33,6 +33,7 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   late List<Product> products;
+  final Cart cart = Cart();
 
   @override
   void initState() {
@@ -101,8 +102,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => ProductDetail(
-                                  product: products[index],
-                                ))));
+                                product: products[index], cart: cart))));
               },
             )
           : Center(
@@ -114,21 +114,34 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
 class ProductDetail extends StatelessWidget {
   Product product;
+  final Cart cart;
 
-  ProductDetail({required this.product});
+  ProductDetail({required this.product, required this.cart});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail"),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CartScreen(cart: cart)));
+                cart.addToCart(product);
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text("Add to cart")));
+              },
+              child: Icon(Icons.add_shopping_cart))
+        ],
       ),
       body: Column(
         children: [
           Padding(padding: EdgeInsets.all(20)),
           // Image(image: )
           Text(product.tenbaihat),
-
           Text(product.tacgia),
           Text(product.duongdan),
           Text(product.loibaihat),
@@ -171,6 +184,37 @@ class HomeScreen extends StatelessWidget {
           child: Text("Go to list screen"),
         ),
       ),
+    );
+  }
+}
+
+class Cart {
+  List<Product> item = [];
+
+  void addToCart(Product product) {
+    item.add(product);
+  }
+}
+
+class CartScreen extends StatelessWidget {
+  final Cart cart;
+
+  CartScreen({required this.cart});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Cart"),
+      ),
+      body: ListView.builder(
+          itemCount: cart.item.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(cart.item[index].tenbaihat),
+              subtitle: Text(cart.item[index].loibaihat),
+            );
+          }),
     );
   }
 }
